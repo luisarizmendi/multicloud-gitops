@@ -13,6 +13,10 @@ clusterGroup:
       namespace: open-cluster-management
       channel: release-2.9
       #csv: advanced-cluster-management.v2.6.1
+    aap:
+      name: aap
+      namespace: aap
+      channel: stable-2.4-cluster-scoped
   projects:
     - hub
     - config-demo
