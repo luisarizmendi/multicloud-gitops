@@ -47,6 +47,9 @@ clusterGroup:
       name: aap-config
       project: hub
       path: charts/hub/aap-config
+      syncPolicy:
+        syncOptions:
+          - ServerSideApply=true
     acm:
       name: acm
       namespace: open-cluster-management
