@@ -7,20 +7,17 @@ clusterGroup:
     - aap
     - vault
     - golang-external-secrets
-    - hello-world
   subscriptions:
     acm:
       name: advanced-cluster-management
       namespace: open-cluster-management
       channel: release-2.9
       #csv: advanced-cluster-management.v2.6.1
-    aap:
+    aap-operator:
       name: ansible-automation-platform-operator
-      namespace: aap
-      channel: stable-2.4-cluster-scoped
+      namespace: ansible-automation-platform
   projects:
     - hub
-    - hello-world
   # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
   sharedValueFiles:
@@ -42,6 +39,14 @@ clusterGroup:
   #   - '/overrides/values-{{ $.Values.global.hubClusterDomain }}.yaml'
   #   - '/overrides/values-{{ $.Values.global.localClusterDomain }}.yaml'
   applications:
+    aap:
+      name: ansible-automation-platform
+      project: hub
+      path: charts/hub/ansible-automation-platform
+    aap-config:
+      name: aap-config
+      project: hub
+      path: charts/hub/aap-config
     acm:
       name: acm
       namespace: open-cluster-management
@@ -62,11 +67,6 @@ clusterGroup:
       namespace: golang-external-secrets
       project: hub
       path: common/golang-external-secrets
-    hello-world:
-      name: hello-world
-      namespace: hello-world
-      project: hello-world
-      path: charts/all/hello-world
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
@@ -75,12 +75,11 @@ clusterGroup:
     # For additional overrides that apply to the jobs, please refer to
     # https://hybrid-cloud-patterns.io/imperative-actions/#additional-job-customizations
     jobs:
-      - name: hello-world
-        # ansible playbook to be run
-        playbook: common/ansible/playbooks/hello-world/hello-world.yaml
-        # per playbook timeout in seconds
-        timeout: 234
-        # verbosity: "-v"
+      - name: configure-aap-controller
+        playbook: ansible/imperative_configure_controller.yml
+        image: quay.io/hybridcloudpatterns/ansible-edge-gitops-ee:latest
+        verbosity: -vvv
+        timeout: "900"
   managedClusterGroups:
     exampleRegion:
       name: group-one
