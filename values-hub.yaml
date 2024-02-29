@@ -2,11 +2,11 @@ clusterGroup:
   name: hub
   isHubCluster: true
   namespaces:
-    - letsencrypt
+    - default
     - open-cluster-management
+    - aap
     - vault
     - golang-external-secrets
-    - config-demo
     - hello-world
   subscriptions:
     acm:
@@ -20,8 +20,6 @@ clusterGroup:
       channel: stable-2.4-cluster-scoped
   projects:
     - hub
-    - letsencrypt
-    - config-demo
     - hello-world
   # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
@@ -64,11 +62,6 @@ clusterGroup:
       namespace: golang-external-secrets
       project: hub
       path: common/golang-external-secrets
-    config-demo:
-      name: config-demo
-      namespace: config-demo
-      project: config-demo
-      path: charts/all/config-demo
     hello-world:
       name: hello-world
       namespace: hello-world
