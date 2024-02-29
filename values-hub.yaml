@@ -2,6 +2,7 @@ clusterGroup:
   name: hub
   isHubCluster: true
   namespaces:
+    - letsencrypt
     - open-cluster-management
     - vault
     - golang-external-secrets
@@ -19,6 +20,7 @@ clusterGroup:
       channel: stable-2.4-cluster-scoped
   projects:
     - hub
+    - letsencrypt
     - config-demo
     - hello-world
   # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
