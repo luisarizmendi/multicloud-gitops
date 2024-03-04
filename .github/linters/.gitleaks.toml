@@ -5,4 +5,5 @@ files = [
   "ansible/plugins/modules/*.py",
   "ansible/tests/unit/test_*.py",
   "ansible/tests/unit/*.yaml",
+  "common/ansible/tests/unit/*.yaml"",
 ]
