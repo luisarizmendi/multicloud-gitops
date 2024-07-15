@@ -84,10 +84,10 @@ clusterGroup:
         # verbosity: "-v"
   managedClusterGroups:
     exampleRegion:
-      name: group-one
+      name: edge
       acmlabels:
         - name: clusterGroup
-          value: group-one
+          value: edge
       helmOverrides:
         - name: clusterGroup.isHubCluster
           value: false
