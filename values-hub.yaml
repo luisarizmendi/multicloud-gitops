@@ -5,8 +5,8 @@ clusterGroup:
     - open-cluster-management
     - vault
     - golang-external-secrets
-    - config-demo
     - hello-world
+  #  - config-demo
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -15,8 +15,8 @@ clusterGroup:
       #csv: advanced-cluster-management.v2.6.1
   projects:
     - hub
-    - config-demo
     - hello-world
+   # - config-demo
   # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
   sharedValueFiles:
@@ -58,11 +58,11 @@ clusterGroup:
       namespace: golang-external-secrets
       project: hub
       path: common/golang-external-secrets
-    config-demo:
-      name: config-demo
-      namespace: config-demo
-      project: config-demo
-      path: charts/all/config-demo
+  #  config-demo:
+  #    name: config-demo
+  #    namespace: config-demo
+  #    project: config-demo
+  #    path: charts/all/config-demo
     hello-world:
       name: hello-world
       namespace: hello-world
